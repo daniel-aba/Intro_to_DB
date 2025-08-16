@@ -1,39 +1,31 @@
-#!/usr/bin/env python3
-
 import mysql.connector
 from mysql.connector import errorcode
 
-# Replace with your MySQL username and password
-DB_USER = "root"
-DB_PASSWORD = "Abadaniel@284"
-DB_HOST = "localhost"
-DATABASE_NAME = "alx_book_store"
+# ... (rest of your script) ...
 
 def create_database():
     """Creates the alx_book_store database if it does not exist."""
     try:
         # Establish connection to the MySQL server
         cnx = mysql.connector.connect(
-            host=DB_HOST,
-            user=DB_USER,
-            password=DB_PASSWORD
+            host="localhost",
+            user="root",
+            password="Abadaniel@284"
         )
-
+        
         cursor = cnx.cursor()
 
-        # SQL statement to create the database
-        create_db_query = "CREATE DATABASE IF NOT EXISTS {}".format(DATABASE_NAME)
+        # The SQL statement to create the database
+        create_db_query = "CREATE DATABASE IF NOT EXISTS alx_book_store"
 
         # Execute the SQL statement
         cursor.execute(create_db_query)
 
-        print("Database '{}' created successfully!".format(DATABASE_NAME))
+        print("Database 'alx_book_store' created successfully!")
 
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Error: Access denied. Check your username and password.")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Error: Database does not exist.")
         else:
             print("Error: {}".format(err))
     finally:
